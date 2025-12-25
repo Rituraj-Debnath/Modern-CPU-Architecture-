@@ -1,0 +1,15 @@
+CPU has major 4 components , lets learn them first and will continue with the flow:
+
+1. Control Unit : It fetches instructions from memory , decodes them and decides which component should work. So it doesn't do calculations or store data. so Control Unit is the Commander. Ex: When a program is running, instructions live in memory. The Control Unit takes them one by one, understands what they mean, and tells the rest of the CPU what to do.
+
+For example, when your program says:  “Add these two numbers” , the Control Unit figures out:
+Which numbers?
+Where are they stored?
+Which unit should do the calculation?
+Where should the result go?
+
+Then it then sends signals to the registers, the ALU, and the memory system to make this happen. Without the Control Unit, the CPU would be powerful but completely directionless.
+
+2. ALU(Arithmetic & Logic Unit): Its a physical unit made upon the silicon waffer from logic gates using transistors that performs the basic Arithmetic               addition,substraction,multiplication,division ) , Logical operations ( AND,OR,NOT,NAND,XOR,ADDER etc ) & comparisons ( > , < , >= , <= , == ). So it actually performs calculations.
+ex: age = 20
+if (age>18): print("vote now") else: print("No vote") , so here CU
