@@ -12,4 +12,67 @@ Then it then sends signals to the registers, the ALU, and the memory system to m
 
 2. ALU(Arithmetic & Logic Unit): Its a physical unit made upon the silicon waffer from logic gates using transistors that performs the basic Arithmetic               addition,substraction,multiplication,division ) , Logical operations ( AND,OR,NOT,NAND,XOR,ADDER etc ) & comparisons ( > , < , >= , <= , == ). So it actually performs calculations.
 ex: age = 20
-if (age>18): print("vote now") else: print("No vote") , so here CU
+if (age>18): print("vote now") else: print("No vote") , so this is like first Control unit gets the memory address of the instrcution from the program counter , then it fetches that instruction from the (L1,L2,L3 cache or from RAM) memory using the address ( such as 0x00401000) and store the instruction in Instruction register , then decode the instruction and  decide what to do next, next it ask the ALU to do the computation and create a flag (true/false) according to the computational calculation.
+
+3. Registers: These are very fast storage that temporarily holds data ( address,numbers) made of flip-flop circuits in the cpu silicon chip, Faster than cache & RAM. Number of registers differ acccording to the modern CPU architecture(more than 70+).
+
+4. Cache Memory (L1,L2,L3): Cache/SRAM is a very fast storage (physical) in the cpu chip. Its mainly used to store data that is frequently used by user. Its faster than RAM(DRAM) & larger than registers. whenever we lets say open yt , so everytime the browser data is cached for fast access. SO the speed order is : Registers → L1 Cache → L2 Cache → L3 Cache → RAM → Disk.  L3 cache is a shared cache among all multiple cores in the cpu.
+
+5. Instruction Decoder : Its main job is to decode the instruction stored in the Instruction Register and generate signals that the Control Unit uses to execute that instruction.
+EX: After the instuctions stored in the IR ( such as 10101000 00110010 ), the Instruction Decoder decodes this binary into meaningful signals so that the CU can understand and take decision.
+
+--- After these 5 major components there are another crucial components that are a part of a modern CPU. Lets discuss them !
+
+6.Instruction Pipeline : The pipeline splits instruction execution into stages so the CPU doesn’t wait for one instruction to fully finish before starting the next.
+Example:
+While instruction A is executing in the ALU, instruction B is being decoded, and instruction C is being fetched.
+Like an assembly line — multiple cars built at once.
+
+7.Branch Prediction Unit: It predicts whether a branch (if/else, loop) will be taken so the CPU can fetch the next instruction early.
+Example:
+In a for loop that runs 100 times, the predictor learns that the branch is “taken” almost every time and keeps the pipeline full.
+
+8. Instruction Scheduler : Decides which instruction should be sent to execution units next based on readiness.
+Example:
+If instruction 1 is waiting for memory but instruction 2 is ready, the scheduler runs instruction 2 first instead of stalling.
+
+9. Out-of-Order Execution Engine : It allows instructions to execute as soon as their inputs are available, not strictly in code order.
+Example:
+A = B + C
+D = E + F
+If B is slow to load but E is ready, the CPU executes the second line first internally.
+
+10. Reservation Stations: Hold instructions that are decoded and ready but waiting for data or a free execution unit.
+Example:
+An instruction waits here until its required register value arrives from memory.
+
+11. Reorder Buffer (ROB): Ensures results are written back in the correct program order even if execution was out of order.
+Example:
+Even if instruction 2 finishes before instruction 1, the ROB commits instruction 1’s result first to keep program correctness.
+
+12. Load / Store Unit: Handles all memory reads and writes safely and in the right order.
+Example:
+If one instruction writes to a variable and another reads it, the LSU ensures the read sees the correct value.
+
+13. Translation Lookaside Buffer (TLB): Caches recent virtual → physical memory address translations.
+Example:
+When your program accesses memory repeatedly, the TLB avoids slow page-table walks each time.
+
+14. Execution Units (beyond ALU): Different execution units specialize in different types of work.
+Example:
+Integer math → integer unit
+Floating-point math → FPU
+Video/math vectors → SIMD/AVX unit
+They run in parallel.
+
+15. Register Renaming Logic: Maps logical registers to physical ones to remove false dependencies.
+Example:
+Two instructions both use “R1” in code, but the CPU maps them to different physical registers so they don’t block each other.
+
+16. Prefetch Unit: Predicts future memory accesses and loads data into cache early.
+Example:
+While reading an array sequentially, the prefetcher loads the next elements before the program asks for them.
+
+17. Micro-op (µop) Cache: Stores decoded instructions so the CPU can skip decoding next time.
+Example:
+Loops benefit heavily — decoded instructions are reused directly, saving power and time.
