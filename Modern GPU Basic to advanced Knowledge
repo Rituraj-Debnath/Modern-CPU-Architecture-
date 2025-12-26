@@ -1,0 +1,35 @@
+## Author : Rituraj Debnath
+## Basic to advanced of GPU knowledge
+## Its not a copy paste AI work, Created, accumulated from different sources and written in very simple language, created to extend my hardware knowledge.
+
+
+
+so first of all what is a GPU ?
+A GPU or graphics processing Unit is specialised microprocessor chips to execute the same operation on a very large amount of data at the same time. EX: In Video games where the application needs to execute same operation and display thousands on pixels in the screen where each of them have different intensity and movement. Its originally invented to render images on display devices. Mainly GPU is for highly parallel computing tasks.
+
+---- So whats the difference between a CPU & GPU , can they replace each other ? 
+--------------------   CPU ------------------------
+1. A CPU is a generalized component mainly deal with the basic functions  of a computer.
+2. It mainly emphasizes on higher speed & lower latency
+3. It executes the processes serially.
+4. CPU have powerful ( intel core ultra 9 445k cores run at 5.7ghz)  but limited Cores.
+
+----------------------  GPU ------------------------
+1. GPU is great for parallel computing .
+2. It emphasizes on throughput
+3. executes processes parallelly.
+4. Thousands of cores but less powerfull( ex RTX 5090 have upto only 2.41 ghz speed )
+
+----- So can we run all the CPU tasks on a GPU ?
+No,,, we cant do those things !
+1. GPU cant run a OS ,,,as it does'nt have interrupt handling , no system call support , No context switching , high latency. GPU is not designed for I/O handling like USB, Storage,Hardware interrupt handling etc.     
+
+-----So the question arrives can we run codes ( such as C,C++,java,python ) on a GPU ?
+NO we cant run. As a program have different steps in execution like system calls, file I/O , that cant be done using a GPU because its not made for this workloads.
+While we can create custom kernel(special function that runs on GPU) for GPU's , but still we cant run a complete program on a GPU.
+
+------ Then why we USE GPU for machine learning purpose ?
+Machine learning is math-heavy and parallel matrix and vector operations (multiplication, addition, dot products) that are repeated millions or billions of times using thousand of cores & special tensor cores, . GPUs are designed exactly for this kind of work.
+
+*** Tensor cores are specialized units for doing matrix multiplication.
+
